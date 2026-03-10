@@ -1,0 +1,26 @@
+# Python cache/build
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+
+# HLA generated outputs
+.hla_vscode/
+out*/
+tmp/
+temp_*.d2
+temp_*.svg
+
+# VS Code extension build artifacts
+vscode_hla_sidepanel/node_modules/
+vscode_hla_sidepanel/out/
+vscode_hla_sidepanel/*.vsix
+
+# OS junk
+Thumbs.db
+.DS_Store

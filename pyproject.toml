@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hussain-livetorch-architect"
+version = "0.1.0"
+description = "Hussain LiveTorch Architect (HLA): hybrid static/runtime PyTorch architecture diagram generator."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+runtime = ["torch>=2.2"]
+export = ["graphviz>=0.20"]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+hla = "hussain_livetorch_architect.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
