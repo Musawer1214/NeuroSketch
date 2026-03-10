@@ -11,6 +11,7 @@ This repository is currently best treated as an open MVP: there is a working fou
 - strengthen runtime verification edge cases
 - improve VS Code extension behavior and messaging
 - add more tests around graph merging and exports
+- explore paths toward a less PyTorch-specific graph core
 - improve packaging and developer setup
 
 ## Local Setup

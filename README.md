@@ -1,6 +1,6 @@
 # Hussain LiveTorch Architect (HLA)
 
-Hussain LiveTorch Architect is an MVP for a simple but useful idea: turn PyTorch model code into a live architecture diagram while the model is being written.
+Hussain LiveTorch Architect is an MVP for a simple but useful idea: turn deep-learning model code into a live architecture diagram while the model is being written.
 
 The project combines:
 
@@ -14,7 +14,16 @@ This repository is public as an open prototype. The core idea is here, the imple
 
 ## Project Idea
 
-The original concept is described in [`live_pytorch_architecture_tool_documentation.pdf`](./live_pytorch_architecture_tool_documentation.pdf): a developer tool that keeps a deep-learning architecture diagram synchronized with PyTorch source code.
+The original concept is described in [`live_pytorch_architecture_tool_documentation.pdf`](./live_pytorch_architecture_tool_documentation.pdf): a developer tool that keeps a deep-learning architecture diagram synchronized with model source code while the user is coding.
+
+The broader vision is:
+
+- write model code and see the architecture update live beside the editor
+- inspect the structure while designing, debugging, and iterating
+- include useful details on the diagram such as layer names, parameters, tensor shapes, and source locations
+- eventually support more than one modeling stack
+
+Today, the implementation is clearly PyTorch-first. That is the current working scope of the repository. The larger product idea can later expand to other deep-learning libraries or even a framework-agnostic intermediate representation.
 
 The intended workflow is:
 
@@ -26,7 +35,7 @@ The intended workflow is:
 
 ## Current Status
 
-This is not just a blank concept repo. It already contains a working MVP:
+This is not just a blank concept repo. It already contains a working MVP for the PyTorch version of the idea:
 
 - Python package with CLI commands for `analyze`, `watch`, and `demo`
 - AST-based parser for `nn.Module` classes and common layer patterns
@@ -42,6 +51,7 @@ What is still incomplete or only partially implemented:
 - the spec describes a richer editor UX centered on React Flow and ELK-driven interaction, but the current UI is lighter-weight
 - advanced graph abstractions like collapsible repeated blocks are not implemented
 - `torch.export` integration is referenced in the design doc but not implemented in the current Python runtime path
+- the long-term idea of supporting frameworks beyond PyTorch is not implemented yet
 - error surfacing, packaging, onboarding, and release polish are still prototype-level
 - the overall repo still reflects experimentation, not a finished product
 
@@ -94,6 +104,7 @@ High-value contribution areas include:
 - better parsing coverage for more model patterns
 - stronger runtime graph alignment between AST and execution
 - richer diagram UX and interaction
+- design work toward a framework-agnostic graph layer beyond PyTorch
 - packaging and install experience
 - better error reporting and example projects
 

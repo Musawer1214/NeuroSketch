@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-This repository began as a design-first idea for a live PyTorch architecture diagram tool and has already grown into a real MVP.
+This repository began as a design-first idea for a live architecture diagram tool for deep-learning model code and has already grown into a real MVP.
 
 The codebase is not fully productized, but it is also not a placeholder:
 
@@ -28,11 +28,17 @@ The main value proposition is strong:
 - easier export of architecture figures for papers and docs
 - live editor feedback instead of separate manual diagram drawing
 
+From the project contents and the intent behind them, the best interpretation is:
+
+- the product vision is broader than a single PyTorch script parser
+- the implemented MVP is PyTorch-focused
+- the long-term opportunity is a live "architecture companion" that could eventually support other deep-learning libraries as well
+
 ## What Is Implemented Today
 
 ### 1. Core Python package
 
-The package under `hussain_livetorch_architect/` already implements the backbone of the idea:
+The package under `hussain_livetorch_architect/` already implements the backbone of the PyTorch version of the idea:
 
 - AST parser for `nn.Module` classes
 - support for layer declarations in `__init__`
@@ -96,11 +102,15 @@ The parser handles a useful subset of PyTorch patterns, but modern research mode
 
 These are only partially addressed today.
 
-### 3. `torch.export` integration
+### 3. Multi-framework support
+
+The broader concept could support other deep-learning stacks or a framework-agnostic IR layer. The current code does not do that yet. Right now, the project is explicitly centered on PyTorch parsing and PyTorch runtime execution.
+
+### 4. `torch.export` integration
 
 The design doc references `torch.export`, but the code currently uses hooks and `torch.fx`. That is a reasonable MVP decision, though it leaves some future runtime graph fidelity on the roadmap.
 
-### 4. Product hardening
+### 5. Product hardening
 
 The repo still needs:
 
@@ -143,6 +153,7 @@ The repo still needs:
 - support more layer/function patterns
 - expose better errors in CLI and VS Code
 - add packaged extension release flow
+- begin separating graph IR from PyTorch-specific assumptions where practical
 
 ### Longer-term
 
