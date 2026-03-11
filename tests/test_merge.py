@@ -1,5 +1,5 @@
-from hussain_livetorch_architect.ir import GraphEdge, GraphIR, GraphNode
-from hussain_livetorch_architect.merge import merge_graphs
+from neurosketch.ir import GraphEdge, GraphIR, GraphNode
+from neurosketch.merge import merge_graphs
 
 
 def test_merge_marks_verified() -> None:

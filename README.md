@@ -1,125 +1,136 @@
-# Hussain LiveTorch Architect (HLA)
+# NeuroSketch
 
-Hussain LiveTorch Architect is an MVP for a simple but useful idea: turn deep-learning model code into a live architecture diagram while the model is being written.
+🧠 NeuroSketch is a live architecture companion for deep-learning model development.
 
-The project combines:
+Write model code, keep coding, and see the architecture update beside your editor in real time. The long-term vision is broader than any one framework, but the current MVP is PyTorch-first and already includes a working parser, runtime verification flow, diagram export pipeline, and VS Code side panel.
 
-- static parsing for fast draft diagrams while editing
-- optional runtime verification for shape-aware graphs
-- a stable JSON graph format for downstream rendering
-- export paths for documentation, demos, and paper-style figures
-- a VS Code side panel for live feedback while coding
+## ✨ What NeuroSketch Tries To Do
 
-This repository is public as an open prototype. The core idea is here, the implementation is partially complete, and contributions are welcome.
+NeuroSketch is built around one simple workflow:
 
-## Project Idea
+1. write a model
+2. see the architecture update while you code
+3. inspect the structure, layer details, and flow without leaving the editor
+4. verify the graph with runtime execution when you want more accuracy
+5. export diagrams for debugging, documentation, or research papers
 
-The original concept is described in [`live_pytorch_architecture_tool_documentation.pdf`](./live_pytorch_architecture_tool_documentation.pdf): a developer tool that keeps a deep-learning architecture diagram synchronized with model source code while the user is coding.
+## 🚀 What Works Today
 
-The broader vision is:
+This repository already contains a real MVP, not just an idea:
 
-- write model code and see the architecture update live beside the editor
-- inspect the structure while designing, debugging, and iterating
-- include useful details on the diagram such as layer names, parameters, tensor shapes, and source locations
-- eventually support more than one modeling stack
-
-Today, the implementation is clearly PyTorch-first. That is the current working scope of the repository. The larger product idea can later expand to other deep-learning libraries or even a framework-agnostic intermediate representation.
-
-The intended workflow is:
-
-1. edit a PyTorch model
-2. see a draft architecture graph update immediately
-3. run a verification pass with sample inputs
-4. upgrade the graph from draft to verified with tensor shapes and execution order
-5. export clean diagrams for debugging, documentation, or research papers
-
-## Current Status
-
-This is not just a blank concept repo. It already contains a working MVP for the PyTorch version of the idea:
-
-- Python package with CLI commands for `analyze`, `watch`, and `demo`
-- AST-based parser for `nn.Module` classes and common layer patterns
-- runtime verification with forward hooks and `torch.fx` fallback logic
-- graph merge pipeline that combines draft and verified views
-- DOT and D2 exporters with SVG, PNG, and PDF rendering support
-- local web demo for live preview
-- VS Code extension for side-panel and beside-editor diagrams
+- PyTorch `nn.Module` parsing from source code
+- draft graph generation from AST analysis
+- optional runtime verification with hooks and `torch.fx`
+- graph merge logic for draft + verified views
+- JSON, DOT, and D2 graph export
+- SVG, PNG, and PDF rendering support when external tools are available
+- local browser demo for live preview
+- VS Code side panel / beside-editor extension
 - automated tests that currently pass
 
-What is still incomplete or only partially implemented:
+## 🧩 Why It’s Useful
 
-- the spec describes a richer editor UX centered on React Flow and ELK-driven interaction, but the current UI is lighter-weight
-- advanced graph abstractions like collapsible repeated blocks are not implemented
-- `torch.export` integration is referenced in the design doc but not implemented in the current Python runtime path
-- the long-term idea of supporting frameworks beyond PyTorch is not implemented yet
-- error surfacing, packaging, onboarding, and release polish are still prototype-level
-- the overall repo still reflects experimentation, not a finished product
+NeuroSketch is meant to help with:
 
-## Repository Layout
+- understanding how a model is actually structured
+- spotting design issues while still coding
+- communicating architecture ideas to teammates
+- generating cleaner visuals for notes, reports, and papers
+- reducing the need to manually redraw model diagrams
 
-- `hussain_livetorch_architect/` - core Python analyzer, runtime verifier, graph IR, exporters, CLI, and live demo server
-- `vscode_hla_sidepanel/` - VS Code extension that renders live diagrams while editing Python files
-- `tests/` - unit tests for parser, merge logic, exporters, runtime verification, and demo helpers
-- `examples/` - small sample model used for quick local checks
-- `train.py` - editable PyTorch sample for live iteration
-- `live_pytorch_architecture_tool_documentation.pdf` - original design/specification document
+## 🛠 Current Scope
 
-## Quick Start
+Right now, the implementation is focused on PyTorch.
+
+That means:
+
+- the product vision is broader
+- the current engine is PyTorch-specific
+- the next major evolution would be making the graph layer less tied to PyTorch assumptions
+
+## 🚧 What Still Needs Work
+
+This is still a prototype/MVP, so several parts are incomplete:
+
+- richer interactive diagram UX
+- broader support for real-world model patterns
+- stronger alignment between static and runtime graphs
+- more advanced abstractions like repeated block collapsing
+- multi-framework support beyond PyTorch
+- better packaging, onboarding, and release polish
+
+## ⚡ Quick Start
+
+Install the project in editable mode:
 
 ```powershell
 python -m pip install -e .[dev]
-python -m hussain_livetorch_architect analyze --source examples/cnn_example.py --class-name TinyCNN --output-dir out
 ```
 
-Run with runtime verification:
+Analyze a sample model:
+
+```powershell
+python -m neurosketch analyze --source examples/cnn_example.py --class-name TinyCNN --output-dir out
+```
+
+Run a verified analysis:
 
 ```powershell
 python -m pip install -e .[runtime]
-python -m hussain_livetorch_architect analyze --source examples/cnn_example.py --class-name TinyCNN --verify --input-shape 1,3,32,32 --output-dir out_verified
+python -m neurosketch analyze --source examples/cnn_example.py --class-name TinyCNN --verify --input-shape 1,3,32,32 --output-dir out_verified
 ```
 
-Run the local demo:
+Run the live local demo:
 
 ```powershell
-python -m hussain_livetorch_architect demo --source train.py --class-name TrainNet --verify --input-shape 1,3,32,32 --output-dir out_live --open-browser
+python -m neurosketch demo --source train.py --class-name TrainNet --verify --input-shape 1,3,32,32 --output-dir out_live --open-browser
 ```
 
-## Documentation
+## 🧪 Test Status
 
-- Project analysis: [`docs/PROJECT_ANALYSIS.md`](./docs/PROJECT_ANALYSIS.md)
-- Contribution guide: [`CONTRIBUTING.md`](./CONTRIBUTING.md)
-
-## Why Contribute
-
-This repo is a good base for anyone interested in:
-
-- PyTorch developer tooling
-- diagram generation from source code
-- ML debugging and observability UX
-- VS Code extension development
-- paper-quality architecture figure export
-
-High-value contribution areas include:
-
-- better parsing coverage for more model patterns
-- stronger runtime graph alignment between AST and execution
-- richer diagram UX and interaction
-- design work toward a framework-agnostic graph layer beyond PyTorch
-- packaging and install experience
-- better error reporting and example projects
-
-## Development Notes
-
-Local test status during repository analysis:
+Run the test suite with:
 
 ```powershell
 python -m pytest
 ```
 
-Current result: `10 passed`
+Current local validation during this repo update:
 
-## Contribution Policy
+- `10 passed`
 
-Issues and pull requests are welcome.
+## 📁 Project Structure
 
-One practical note: the repository does not currently include an explicit open-source license file. That should be added by the maintainer before broader reuse expectations are set. Until then, contributions are still welcome for discussion, review, and improvement of the project itself.
+- `neurosketch/` - core analyzer, runtime verifier, graph IR, exporters, CLI, and live demo server
+- `vscode_neurosketch_sidepanel/` - VS Code extension for live architecture previews
+- `tests/` - parser, exporter, runtime, merge, and demo tests
+- `examples/` - small example model for quick experiments
+- `train.py` - editable sample model for live iteration
+- `neurosketch_design_documentation.pdf` - original design/specification document
+
+## 📚 Documentation
+
+- Project analysis: [`docs/PROJECT_ANALYSIS.md`](./docs/PROJECT_ANALYSIS.md)
+- Contributing guide: [`CONTRIBUTING.md`](./CONTRIBUTING.md)
+
+## 📝 Note On The Design PDF
+
+The bundled PDF is the original concept document for the project. It preserves the project’s earlier working title inside the document, but it still captures the main design direction behind NeuroSketch.
+
+## 🤝 Contributions
+
+Contributions are welcome.
+
+Useful contribution areas include:
+
+- parser coverage for more model patterns
+- better verified graph reconstruction
+- better VS Code UX
+- framework-agnostic graph design
+- export quality and presentation
+- packaging and developer experience
+
+## 📌 Important Repo Note
+
+The repository still does not include an explicit open-source license file.
+
+That should be added by the maintainer if the project is going to be opened up for broader reuse and outside contributions.

@@ -3,9 +3,9 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "hussain-livetorch-architect"
+name = "neurosketch"
 version = "0.1.0"
-description = "Hussain LiveTorch Architect (HLA): hybrid static/runtime PyTorch architecture diagram generator."
+description = "NeuroSketch: hybrid static/runtime deep-learning architecture diagram generator with a PyTorch-first MVP."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = []
@@ -16,7 +16,7 @@ export = ["graphviz>=0.20"]
 dev = ["pytest>=8.0"]
 
 [project.scripts]
-hla = "hussain_livetorch_architect.cli:main"
+neurosketch = "neurosketch.cli:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

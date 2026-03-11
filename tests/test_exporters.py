@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from hussain_livetorch_architect.exporters import export_graph, to_d2
-from hussain_livetorch_architect.ir import GraphEdge, GraphIR, GraphNode
+from neurosketch.exporters import export_graph, to_d2
+from neurosketch.ir import GraphEdge, GraphIR, GraphNode
 
 
 def test_export_json_and_dot(tmp_path: Path) -> None:

@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from hussain_livetorch_architect.static_parser import parse_pytorch_source
+from neurosketch.static_parser import parse_pytorch_source
 
 
 def test_parse_minimal_module(tmp_path: Path) -> None:

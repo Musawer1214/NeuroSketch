@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
-$ext = Join-Path $root "vscode_hla_sidepanel"
+$ext = Join-Path $root "vscode_neurosketch_sidepanel"
 
 if (-not (Test-Path $ext)) {
     throw "Extension folder not found: $ext"
@@ -29,5 +29,5 @@ finally {
     Pop-Location
 }
 
-Write-Host "HLA VS Code extension installed."
-Write-Host "Open your normal VS Code window and run: HLA: Open Diagram Beside"
+Write-Host "NeuroSketch VS Code extension installed."
+Write-Host "Open your normal VS Code window and run: NeuroSketch: Open Diagram Beside"

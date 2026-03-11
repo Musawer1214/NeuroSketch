@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from hussain_livetorch_architect.runtime_verifier import TORCH_AVAILABLE, verify_runtime
+from neurosketch.runtime_verifier import TORCH_AVAILABLE, verify_runtime
 
 
 @pytest.mark.skipif(not TORCH_AVAILABLE, reason="PyTorch not installed")
@@ -32,4 +32,4 @@ class Toy(nn.Module):
 
 
 def test_runtime_module_importable() -> None:
-    assert importlib.util.find_spec("hussain_livetorch_architect.runtime_verifier") is not None
+    assert importlib.util.find_spec("neurosketch.runtime_verifier") is not None

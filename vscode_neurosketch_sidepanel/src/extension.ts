@@ -35,14 +35,14 @@ interface GraphPayload {
   meta?: { mode?: string };
 }
 
-const VIEW_ID = "hla.diagramView";
+const VIEW_ID = "neurosketch.diagramView";
 const DEFAULT_STATUS: StatusPayload = {
   state: "idle",
   message: "Open a Python model file to start live diagram updates.",
 };
 
 export function activate(context: vscode.ExtensionContext): void {
-  const provider = new HlaSidePanelProvider(context);
+  const provider = new NeuroSketchSidePanelProvider(context);
 
   context.subscriptions.push(
     vscode.window.registerWebviewViewProvider(VIEW_ID, provider, {
@@ -51,25 +51,25 @@ export function activate(context: vscode.ExtensionContext): void {
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand("hla.openPanel", async () => {
+    vscode.commands.registerCommand("neurosketch.openPanel", async () => {
       await provider.openPanel();
     }),
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand("hla.openDiagramBeside", async () => {
+    vscode.commands.registerCommand("neurosketch.openDiagramBeside", async () => {
       await provider.openDiagramBeside();
     }),
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand("hla.refreshDiagram", async () => {
+    vscode.commands.registerCommand("neurosketch.refreshDiagram", async () => {
       await provider.refresh("manual");
     }),
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand("hla.toggleRealtime", () => {
+    vscode.commands.registerCommand("neurosketch.toggleRealtime", () => {
       provider.toggleRealtime();
     }),
   );
@@ -95,7 +95,7 @@ export function activate(context: vscode.ExtensionContext): void {
 
 export function deactivate(): void {}
 
-class HlaSidePanelProvider implements vscode.WebviewViewProvider {
+class NeuroSketchSidePanelProvider implements vscode.WebviewViewProvider {
   private readonly context: vscode.ExtensionContext;
   private view: vscode.WebviewView | undefined;
   private editorPanel: vscode.WebviewPanel | undefined;
@@ -127,7 +127,7 @@ class HlaSidePanelProvider implements vscode.WebviewViewProvider {
   }
 
   public async openPanel(): Promise<void> {
-    await vscode.commands.executeCommand("workbench.view.extension.hla");
+    await vscode.commands.executeCommand("workbench.view.extension.neurosketch");
     try {
       await vscode.commands.executeCommand(`${VIEW_ID}.focus`);
     } catch {
@@ -139,8 +139,8 @@ class HlaSidePanelProvider implements vscode.WebviewViewProvider {
   public async openDiagramBeside(): Promise<void> {
     if (!this.editorPanel) {
       this.editorPanel = vscode.window.createWebviewPanel(
-        "hla.diagramBeside",
-        "HLA Diagram",
+        "neurosketch.diagramBeside",
+        "NeuroSketch Diagram",
         { viewColumn: vscode.ViewColumn.Beside, preserveFocus: false },
         { enableScripts: true, retainContextWhenHidden: true },
       );
@@ -234,8 +234,8 @@ class HlaSidePanelProvider implements vscode.WebviewViewProvider {
     });
     void vscode.window.showInformationMessage(
       this.realtimeEnabled
-        ? "HLA realtime typing updates enabled."
-        : "HLA realtime typing updates disabled (save still updates).",
+        ? "NeuroSketch realtime typing updates enabled."
+        : "NeuroSketch realtime typing updates disabled (save still updates).",
     );
     this.postStatus();
   }
@@ -267,7 +267,7 @@ class HlaSidePanelProvider implements vscode.WebviewViewProvider {
       updatedAt: new Date().toISOString(),
     });
 
-    const outputDir = path.join(workspaceFolder.uri.fsPath, ".hla_vscode");
+    const outputDir = path.join(workspaceFolder.uri.fsPath, ".neurosketch_vscode");
     await fs.mkdir(outputDir, { recursive: true });
 
     const useTempFromBuffer = reason === "typing" && doc.isDirty;
@@ -278,14 +278,14 @@ class HlaSidePanelProvider implements vscode.WebviewViewProvider {
       if (useTempFromBuffer) {
         tempPath = path.join(
           os.tmpdir(),
-          `hla-live-${Date.now()}-${Math.floor(Math.random() * 100000)}.py`,
+          `neurosketch-live-${Date.now()}-${Math.floor(Math.random() * 100000)}.py`,
         );
         await fs.writeFile(tempPath, doc.getText(), "utf-8");
         sourcePath = tempPath;
       }
 
       const pythonPath = this.getConfig<string>("pythonPath", "python");
-      const analyzerCommand = this.getConfig<string>("analyzerCommand", "hla").trim();
+      const analyzerCommand = this.getConfig<string>("analyzerCommand", "neurosketch").trim();
       const renderer = this.getConfig<string>("renderer", "auto");
       const theme = this.getConfig<string>("theme", "journal-light");
       const layout = this.getConfig<string>("layout", "elk");
@@ -441,9 +441,9 @@ class HlaSidePanelProvider implements vscode.WebviewViewProvider {
     cwd: string,
     token: number,
   ): Promise<void> {
-    const primaryCmd = analyzerCommand || "hla";
+    const primaryCmd = analyzerCommand || "neurosketch";
     return this.execCommand(primaryCmd, analyzeArgs, cwd, token).catch(async (primaryErr) => {
-      const fallbackArgs = ["-m", "hussain_livetorch_architect", ...analyzeArgs];
+      const fallbackArgs = ["-m", "neurosketch", ...analyzeArgs];
       try {
         await this.execCommand(pythonPath, fallbackArgs, cwd, token);
       } catch (fallbackErr) {
@@ -492,7 +492,7 @@ class HlaSidePanelProvider implements vscode.WebviewViewProvider {
   }
 
   private getConfig<T>(key: string, fallback: T): T {
-    const value = vscode.workspace.getConfiguration("hla").get<T>(key);
+    const value = vscode.workspace.getConfiguration("neurosketch").get<T>(key);
     return value === undefined ? fallback : value;
   }
 

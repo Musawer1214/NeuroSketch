@@ -16,7 +16,7 @@ In short: the project has a credible foundation and a clear direction, but it st
 
 ## Original Concept
 
-The bundled design document, `live_pytorch_architecture_tool_documentation.pdf`, describes a hybrid system with two modes:
+The bundled design document, `neurosketch_design_documentation.pdf`, describes a hybrid system with two modes. The PDF itself preserves the project's earlier working title, but its architecture and roadmap still describe the same core idea.
 
 - `Draft mode`: infer a graph from source code using AST parsing and heuristics
 - `Verified mode`: execute the model with sample inputs and capture a more accurate graph plus tensor shapes
@@ -38,7 +38,7 @@ From the project contents and the intent behind them, the best interpretation is
 
 ### 1. Core Python package
 
-The package under `hussain_livetorch_architect/` already implements the backbone of the PyTorch version of the idea:
+The package under `neurosketch/` already implements the backbone of the PyTorch version of the idea:
 
 - AST parser for `nn.Module` classes
 - support for layer declarations in `__init__`

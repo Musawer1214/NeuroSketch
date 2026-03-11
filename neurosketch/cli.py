@@ -183,7 +183,7 @@ def run_demo(args: argparse.Namespace) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="hla", description=TOOL_NAME)
+    parser = argparse.ArgumentParser(prog="neurosketch", description=TOOL_NAME)
     sub = parser.add_subparsers(dest="command", required=True)
 
     common = argparse.ArgumentParser(add_help=False)

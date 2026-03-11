@@ -230,7 +230,7 @@ def _demo_html() -> str:
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HLA Live Demo</title>
+  <title>NeuroSketch Live Demo</title>
   <style>
     :root {
       --bg: #f8fafc;
@@ -329,7 +329,7 @@ def _demo_html() -> str:
 <body>
   <div class="shell">
     <section class="panel meta">
-      <h1>Hussain LiveTorch Architect</h1>
+      <h1>NeuroSketch</h1>
       <p class="subtitle">Live architecture diagram dashboard</p>
       <div id="chips"></div>
       <div class="k">Source</div><div id="source" class="v">-</div>
@@ -342,7 +342,7 @@ def _demo_html() -> str:
       <div id="error" class="error"></div>
     </section>
     <section class="panel canvas">
-      <img id="diagram" alt="HLA diagram preview" />
+      <img id="diagram" alt="NeuroSketch diagram preview" />
     </section>
   </div>
   <script>

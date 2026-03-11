@@ -9,8 +9,9 @@ __pycache__/
 .ruff_cache/
 .venv/
 
-# HLA generated outputs
+# NeuroSketch generated outputs
 .hla_vscode/
+.neurosketch_vscode/
 out*/
 tmp/
 temp_*.d2
@@ -20,6 +21,9 @@ temp_*.svg
 vscode_hla_sidepanel/node_modules/
 vscode_hla_sidepanel/out/
 vscode_hla_sidepanel/*.vsix
+vscode_neurosketch_sidepanel/node_modules/
+vscode_neurosketch_sidepanel/out/
+vscode_neurosketch_sidepanel/*.vsix
 
 # OS junk
 Thumbs.db

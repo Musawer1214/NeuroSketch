@@ -1,4 +1,4 @@
-from hussain_livetorch_architect.live_demo import normalize_demo_formats
+from neurosketch.live_demo import normalize_demo_formats
 
 
 def test_demo_formats_add_svg_and_json() -> None:

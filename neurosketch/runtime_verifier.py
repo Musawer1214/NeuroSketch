@@ -56,7 +56,7 @@ def _collect_node_args(arg: Any) -> list[Any]:
 
 
 def _load_model_class(source_path: Path, class_name: str) -> type:
-    module_name = f"hla_user_model_{source_path.stem}"
+    module_name = f"neurosketch_user_model_{source_path.stem}"
     spec = importlib.util.spec_from_file_location(module_name, source_path)
     if spec is None or spec.loader is None:
         raise RuntimeVerificationError(f"Could not load module from: {source_path}")

@@ -446,7 +446,7 @@ def _shorten_shape_text(shape: str) -> str:
 def to_dot(graph: GraphIR, theme: str = "journal-light") -> str:
     preset = _select_theme(theme)
     lines = [
-        "digraph HLA {",
+        "digraph NeuroSketch {",
         '  rankdir="LR";',
         f'  graph [pad="0.45", nodesep="0.56", ranksep="0.78", splines="spline", bgcolor="{preset.canvas}"];',
         f'  node [shape="box", style="rounded,filled", fontname="{preset.font}", fontsize="11", penwidth="1.45", color="{preset.stroke}"];',

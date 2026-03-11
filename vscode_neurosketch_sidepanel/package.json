@@ -1,9 +1,9 @@
 {
-  "name": "hussain-livetorch-architect-sidepanel",
-  "displayName": "Hussain LiveTorch Architect Panel",
-  "description": "Live PyTorch architecture diagram side panel for VS Code.",
+  "name": "neurosketch-sidepanel",
+  "displayName": "NeuroSketch Panel",
+  "description": "Live deep-learning architecture diagram side panel for VS Code.",
   "version": "0.1.0",
-  "publisher": "hussain",
+  "publisher": "musawer1214",
   "engines": {
     "vscode": "^1.95.0"
   },
@@ -11,27 +11,27 @@
     "Other"
   ],
   "activationEvents": [
-    "onView:hla.diagramView",
-    "onCommand:hla.refreshDiagram",
-    "onCommand:hla.toggleRealtime",
-    "onCommand:hla.openPanel",
-    "onCommand:hla.openDiagramBeside"
+    "onView:neurosketch.diagramView",
+    "onCommand:neurosketch.refreshDiagram",
+    "onCommand:neurosketch.toggleRealtime",
+    "onCommand:neurosketch.openPanel",
+    "onCommand:neurosketch.openDiagramBeside"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "hla",
-          "title": "HLA",
-          "icon": "media/hla-icon.svg"
+          "id": "neurosketch",
+          "title": "NeuroSketch",
+          "icon": "media/neurosketch-icon.svg"
         }
       ]
     },
     "views": {
-      "hla": [
+      "neurosketch": [
         {
-          "id": "hla.diagramView",
+          "id": "neurosketch.diagramView",
           "name": "Architecture Live Diagram",
           "type": "webview"
         }
@@ -39,71 +39,71 @@
     },
     "commands": [
       {
-        "command": "hla.openPanel",
-        "title": "HLA: Open Side Panel"
+        "command": "neurosketch.openPanel",
+        "title": "NeuroSketch: Open Side Panel"
       },
       {
-        "command": "hla.openDiagramBeside",
-        "title": "HLA: Open Diagram Beside"
+        "command": "neurosketch.openDiagramBeside",
+        "title": "NeuroSketch: Open Diagram Beside"
       },
       {
-        "command": "hla.refreshDiagram",
-        "title": "HLA: Refresh Diagram"
+        "command": "neurosketch.refreshDiagram",
+        "title": "NeuroSketch: Refresh Diagram"
       },
       {
-        "command": "hla.toggleRealtime",
-        "title": "HLA: Toggle Realtime Updates"
+        "command": "neurosketch.toggleRealtime",
+        "title": "NeuroSketch: Toggle Realtime Updates"
       }
     ],
     "keybindings": [
       {
-        "command": "hla.openPanel",
+        "command": "neurosketch.openPanel",
         "key": "ctrl+alt+h"
       },
       {
-        "command": "hla.openDiagramBeside",
+        "command": "neurosketch.openDiagramBeside",
         "key": "ctrl+alt+d"
       },
       {
-        "command": "hla.refreshDiagram",
+        "command": "neurosketch.refreshDiagram",
         "key": "ctrl+alt+r",
         "when": "editorLangId == python"
       },
       {
-        "command": "hla.toggleRealtime",
+        "command": "neurosketch.toggleRealtime",
         "key": "ctrl+alt+t",
         "when": "editorLangId == python"
       }
     ],
     "configuration": {
-      "title": "Hussain LiveTorch Architect",
+      "title": "NeuroSketch",
       "properties": {
-        "hla.pythonPath": {
+        "neurosketch.pythonPath": {
           "type": "string",
           "default": "python",
-          "description": "Python executable used to run HLA analyzer."
+          "description": "Python executable used to run the NeuroSketch analyzer."
         },
-        "hla.analyzerCommand": {
+        "neurosketch.analyzerCommand": {
           "type": "string",
-          "default": "hla",
-          "description": "Primary analyzer command. Defaults to hla CLI; falls back to python -m hussain_livetorch_architect."
+          "default": "neurosketch",
+          "description": "Primary analyzer command. Defaults to the neurosketch CLI; falls back to python -m neurosketch."
         },
-        "hla.autoUpdateOnType": {
+        "neurosketch.autoUpdateOnType": {
           "type": "boolean",
           "default": true,
           "description": "Auto-update the diagram while typing (debounced)."
         },
-        "hla.updateDebounceMs": {
+        "neurosketch.updateDebounceMs": {
           "type": "number",
           "default": 600,
           "description": "Debounce delay for typing updates."
         },
-        "hla.verifyOnSave": {
+        "neurosketch.verifyOnSave": {
           "type": "boolean",
           "default": false,
           "description": "Run runtime verification on save. Slower but more accurate."
         },
-        "hla.renderer": {
+        "neurosketch.renderer": {
           "type": "string",
           "enum": [
             "auto",
@@ -113,7 +113,7 @@
           "default": "auto",
           "description": "Rendering backend for exported diagram."
         },
-        "hla.theme": {
+        "neurosketch.theme": {
           "type": "string",
           "enum": [
             "journal-light",
@@ -123,22 +123,22 @@
           "default": "journal-light",
           "description": "Theme used for the diagram renderer."
         },
-        "hla.layout": {
+        "neurosketch.layout": {
           "type": "string",
           "default": "elk",
           "description": "Layout engine. Use elk for D2 journal-style diagrams."
         },
-        "hla.inputShape": {
+        "neurosketch.inputShape": {
           "type": "string",
           "default": "1,3,224,224",
           "description": "Input shape used when verify-on-save is enabled."
         },
-        "hla.pad": {
+        "neurosketch.pad": {
           "type": "number",
           "default": 40,
           "description": "Diagram canvas padding."
         },
-        "hla.className": {
+        "neurosketch.className": {
           "type": "string",
           "default": "",
           "description": "Optional nn.Module class name to analyze. Leave empty to auto-select first class."
